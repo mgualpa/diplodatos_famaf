@@ -1,0 +1,1201 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{famaf\_diplodatos\_modulo1\_laboratorio1-Copy2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Diplomatura AACSyA 2018 - FaMAF - UNC
+
+Análisis y visualización de datos
+
+\section{Laboratorio 1}\label{laboratorio-1}
+
+Trabajo de Laboratorio 1 correspondiente al Módulo 1 "Análisis y
+Visualización de Datos".
+
+\subsubsection{GRUPO 13:}\label{grupo-13}
+
+\paragraph{Mariano Martín Gualpa ( mgualpa@gmail.com
+)}\label{mariano-martuxedn-gualpa-mgualpagmail.com}
+
+\paragraph{Laercio Simoes ( laercio@hpcbrasil.com
+)}\label{laercio-simoes-laerciohpcbrasil.com}
+
+    Dataset:"Comic Characters"
+
+Ubicación:
+https://github.com/fivethirtyeight/data/tree/master/comic-characters
+
+Archivos: * README.md: Descripción de los campos. * dc-wikia-data.csv:
+Dataset correspondiente a los personajes de comic de la editorial DC. *
+marvel-wikia-data.csv: Dataset correspondiente a los personajes de comic
+de la editorial DC.
+
+    Carga de librerías:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} \PYZpc{}matplotlib notebook}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{pandas}
+        \PY{k+kn}{import} \PY{n+nn}{numpy}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn}
+\end{Verbatim}
+
+
+    Parámetros globales:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{head\PYZus{}rows\PYZus{}to\PYZus{}show} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n}{NO\PYZus{}AVAILABLE\PYZus{}LABEL} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NO AVAILABLE}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{UNKNOWN\PYZus{}LABEL} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UNKNOWN}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \section{1. Carga del Dataset}\label{carga-del-dataset}
+
+\subsection{1.1 Carga}\label{carga}
+
+Carga del dataset dc-wikia-data.csv correspondiente a la editorial DC
+Comics. Se presentan a continuación los primeros registros del datasets.
+
+Se cargan ambos datasets por separado y se concatenan en uno mismo al
+que se le agrega un nuevo campo llamado editorial.
+
+    \subsubsection{1.1.1 Carga del dataset dc-wikia-data.csv correspondiente
+a los personajes de DC
+Comics.}\label{carga-del-dataset-dc-wikia-data.csv-correspondiente-a-los-personajes-de-dc-comics.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{dcDataset} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comic\PYZhy{}characters/dc\PYZhy{}wikia\PYZhy{}data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                  \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{dcRowsCountDataset} \PY{o}{=} \PY{n}{dcDataset}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{dcColsCountDataset} \PY{o}{=} \PY{n}{dcDataset}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Registros: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{     Atributos: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{dcRowsCountDataset}\PY{p}{,} \PY{n}{dcColsCountDataset}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{dcDataset}\PY{p}{[}\PY{p}{:}\PY{n}{head\PYZus{}rows\PYZus{}to\PYZus{}show}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Registros: 6896     Atributos: 13
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    page\_id                         name                              urlslug  \textbackslash{}
+        0     1422         Batman (Bruce Wayne)         \textbackslash{}/wiki\textbackslash{}/Batman\_(Bruce\_Wayne)   
+        1    23387        Superman (Clark Kent)        \textbackslash{}/wiki\textbackslash{}/Superman\_(Clark\_Kent)   
+        2     1458   Green Lantern (Hal Jordan)   \textbackslash{}/wiki\textbackslash{}/Green\_Lantern\_(Hal\_Jordan)   
+        3     1659     James Gordon (New Earth)     \textbackslash{}/wiki\textbackslash{}/James\_Gordon\_(New\_Earth)   
+        4     1576  Richard Grayson (New Earth)  \textbackslash{}/wiki\textbackslash{}/Richard\_Grayson\_(New\_Earth)   
+        
+                        ID            ALIGN         EYE        HAIR              SEX  \textbackslash{}
+        0  Secret Identity  Good Characters   Blue Eyes  Black Hair  Male Characters   
+        1  Secret Identity  Good Characters   Blue Eyes  Black Hair  Male Characters   
+        2  Secret Identity  Good Characters  Brown Eyes  Brown Hair  Male Characters   
+        3  Public Identity  Good Characters  Brown Eyes  White Hair  Male Characters   
+        4  Secret Identity  Good Characters   Blue Eyes  Black Hair  Male Characters   
+        
+           GSM              ALIVE  APPEARANCES FIRST APPEARANCE    YEAR  
+        0  NaN  Living Characters       3093.0        1939, May  1939.0  
+        1  NaN  Living Characters       2496.0    1986, October  1986.0  
+        2  NaN  Living Characters       1565.0    1959, October  1959.0  
+        3  NaN  Living Characters       1316.0   1987, February  1987.0  
+        4  NaN  Living Characters       1237.0      1940, April  1940.0  
+\end{Verbatim}
+            
+    \subsubsection{1.1.2 Carga del dataset marvel-wikia-data.csv
+correspondiente a los personajes de
+Marvel.}\label{carga-del-dataset-marvel-wikia-data.csv-correspondiente-a-los-personajes-de-marvel.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{marvelDataset} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comic\PYZhy{}characters/marvel\PYZhy{}wikia\PYZhy{}data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                  \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{marvelRowsCountDataset} \PY{o}{=} \PY{n}{marvelDataset}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{marvelColsCountDataset} \PY{o}{=} \PY{n}{marvelDataset}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Registros: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{     Atributos: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{marvelRowsCountDataset}\PY{p}{,} \PY{n}{marvelColsCountDataset}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{marvelDataset}\PY{p}{[}\PY{p}{:}\PY{n}{head\PYZus{}rows\PYZus{}to\PYZus{}show}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Registros: 16376     Atributos: 13
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}    page\_id                                 name  \textbackslash{}
+        0     1678            Spider-Man (Peter Parker)   
+        1     7139      Captain America (Steven Rogers)   
+        2    64786  Wolverine (James \textbackslash{}"Logan\textbackslash{}" Howlett)   
+        3     1868    Iron Man (Anthony \textbackslash{}"Tony\textbackslash{}" Stark)   
+        4     2460                  Thor (Thor Odinson)   
+        
+                                           urlslug                ID  \textbackslash{}
+        0              \textbackslash{}/Spider-Man\_(Peter\_Parker)   Secret Identity   
+        1        \textbackslash{}/Captain\_America\_(Steven\_Rogers)   Public Identity   
+        2  \textbackslash{}/Wolverine\_(James\_\%22Logan\%22\_Howlett)   Public Identity   
+        3    \textbackslash{}/Iron\_Man\_(Anthony\_\%22Tony\%22\_Stark)   Public Identity   
+        4                    \textbackslash{}/Thor\_(Thor\_Odinson)  No Dual Identity   
+        
+                        ALIGN         EYE        HAIR              SEX  GSM  \textbackslash{}
+        0     Good Characters  Hazel Eyes  Brown Hair  Male Characters  NaN   
+        1     Good Characters   Blue Eyes  White Hair  Male Characters  NaN   
+        2  Neutral Characters   Blue Eyes  Black Hair  Male Characters  NaN   
+        3     Good Characters   Blue Eyes  Black Hair  Male Characters  NaN   
+        4     Good Characters   Blue Eyes  Blond Hair  Male Characters  NaN   
+        
+                       ALIVE  APPEARANCES FIRST APPEARANCE    Year  
+        0  Living Characters       4043.0           Aug-62  1962.0  
+        1  Living Characters       3360.0           Mar-41  1941.0  
+        2  Living Characters       3061.0           Oct-74  1974.0  
+        3  Living Characters       2961.0           Mar-63  1963.0  
+        4  Living Characters       2258.0           Nov-50  1950.0  
+\end{Verbatim}
+            
+    \subsection{~1.2 Merge de ambos datasets en uno
+consolidado.}\label{merge-de-ambos-datasets-en-uno-consolidado.}
+
+Primero se debe agregar el atributo "publisher" a cada dataset y pasar a
+mayusculas los nombres de los atributos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{dcDataset}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{dcDataset}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)}
+        \PY{n}{marvelDataset}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{marvelDataset}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)}
+        \PY{n}{dcDataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PUBLISHER}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DC Comics}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{marvelDataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PUBLISHER}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Marvel}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    A continuación concatenamos ambos dataframes en uno.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{comicsDF} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{dcDataset}\PY{p}{,} \PY{n}{marvelDataset}\PY{p}{]}\PY{p}{)}
+        \PY{n}{rowsCountComicsDF}\PY{p}{,} \PY{n}{colsCountComicsDF} \PY{o}{=} \PY{n}{comicsDF}\PY{o}{.}\PY{n}{shape}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Registros: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{     Reg. DC + Marvel: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{       Atributos: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{rowsCountComicsDF}\PY{p}{,} \PY{n}{dcRowsCountDataset} \PY{o}{+} \PY{n}{marvelRowsCountDataset}\PY{p}{,} \PY{n}{colsCountComicsDF}\PY{p}{)}\PY{p}{)}
+        \PY{n}{comicsDF}\PY{p}{[}\PY{p}{:}\PY{n}{head\PYZus{}rows\PYZus{}to\PYZus{}show}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Registros: 23272     Reg. DC + Marvel: 23272       Atributos: 14 
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}    PAGE\_ID                         NAME                              URLSLUG  \textbackslash{}
+        0     1422         Batman (Bruce Wayne)         \textbackslash{}/wiki\textbackslash{}/Batman\_(Bruce\_Wayne)   
+        1    23387        Superman (Clark Kent)        \textbackslash{}/wiki\textbackslash{}/Superman\_(Clark\_Kent)   
+        2     1458   Green Lantern (Hal Jordan)   \textbackslash{}/wiki\textbackslash{}/Green\_Lantern\_(Hal\_Jordan)   
+        3     1659     James Gordon (New Earth)     \textbackslash{}/wiki\textbackslash{}/James\_Gordon\_(New\_Earth)   
+        4     1576  Richard Grayson (New Earth)  \textbackslash{}/wiki\textbackslash{}/Richard\_Grayson\_(New\_Earth)   
+        
+                        ID            ALIGN         EYE        HAIR              SEX  \textbackslash{}
+        0  Secret Identity  Good Characters   Blue Eyes  Black Hair  Male Characters   
+        1  Secret Identity  Good Characters   Blue Eyes  Black Hair  Male Characters   
+        2  Secret Identity  Good Characters  Brown Eyes  Brown Hair  Male Characters   
+        3  Public Identity  Good Characters  Brown Eyes  White Hair  Male Characters   
+        4  Secret Identity  Good Characters   Blue Eyes  Black Hair  Male Characters   
+        
+           GSM              ALIVE  APPEARANCES FIRST APPEARANCE    YEAR  PUBLISHER  
+        0  NaN  Living Characters       3093.0        1939, May  1939.0  DC Comics  
+        1  NaN  Living Characters       2496.0    1986, October  1986.0  DC Comics  
+        2  NaN  Living Characters       1565.0    1959, October  1959.0  DC Comics  
+        3  NaN  Living Characters       1316.0   1987, February  1987.0  DC Comics  
+        4  NaN  Living Characters       1237.0      1940, April  1940.0  DC Comics  
+\end{Verbatim}
+            
+    \section{~2. Limpieza del Dataset.}\label{limpieza-del-dataset.}
+
+Se contabilizan por cada columna la cantidad de casos NaN.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{printNaNCount}\PY{p}{(}\PY{n}{dataframe}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de NaN por columna:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{dataframe}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{col}\PY{p}{,} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{pandas}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{n}{dataframe}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        
+        \PY{n}{printNaNCount}\PY{p}{(}\PY{n}{comicsDF}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Cantidad de NaN por columna:
+----------------------------
+PAGE\_ID: 0
+NAME: 0
+URLSLUG: 0
+ID: 5783
+ALIGN: 3413
+EYE: 13395
+HAIR: 6538
+SEX: 979
+GSM: 23118
+ALIVE: 6
+APPEARANCES: 1451
+FIRST APPEARANCE: 884
+YEAR: 884
+PUBLISHER: 0
+
+    \end{Verbatim}
+
+    Puede consultarse la tabla para observarse los casos:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{comicsDF}\PY{p}{[}\PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{APPEARANCES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}        PAGE\_ID                                               NAME  \textbackslash{}
+        6541    306472                        Matteo Bischoff (New Earth)   
+        6542    273317                             Doomslayer (New Earth)   
+        6543    242097                             Emily Sung (New Earth)   
+        6544    247494                                 Ry'jll (New Earth)   
+        6545    161599                          Baron Gestapo (New Earth)   
+        6546    183059                            Barro Cruzz (New Earth)   
+        6547    202295                          Barry Quinzel (New Earth)   
+        6548    228571                           Dragonfly II (New Earth)   
+        6549    179905                            Altin Ad'Ms (New Earth)   
+        6550    192422                           D'Kay D'Razz (New Earth)   
+        6551    250303                  Jade Emperor Impostor (New Earth)   
+        6552    172418                             Kaldur'ahm (New Earth)   
+        6553    366208                              Nightwing (New Earth)   
+        6554    173235                         Douglas Parker (New Earth)   
+        6555    120383                                 Aga'po (New Earth)   
+        6556    366202                              Flamebird (New Earth)   
+        6557    105568                         Bro'Dee Walker (New Earth)   
+        6558    391226                                Cynthos (New Earth)   
+        6559    282841                               Nosa'elg (New Earth)   
+        6560     46837                         S'kidds'kakoth (New Earth)   
+        6561     18505                    Baroness Blitzkrieg (New Earth)   
+        6562    173263                           Dorian Chase (New Earth)   
+        6563    308374                          Bizarro Joker (New Earth)   
+        6564    177261                              Bur'Gunza (New Earth)   
+        6565    144412                            R'amey Holl (New Earth)   
+        6566    177272                                 Sn'Hoj (New Earth)   
+        6567    240705                        Baron Bedlam II (New Earth)   
+        6568    181465                              Barracuda (New Earth)   
+        6569     36200                           Barry Pierce (New Earth)   
+        6570    208131                             Basketcase (New Earth)   
+        {\ldots}        {\ldots}                                                {\ldots}   
+        16346    42106                                Thiazzi (Earth-616)   
+        16347   462671                                          TOR\textbackslash{}/test   
+        16348   725312                       Toxin (Luminals) (Earth-616)   
+        16349   507239                          Urizen Ul'var (Earth-616)   
+        16350    40061                                  Valka (Earth-616)   
+        16351   505759                                  Vayor (Earth-616)   
+        16352    16569                               Viridian (Earth-616)   
+        16353    16296                          William Burke (Earth-616)   
+        16354   120833                      William Falsworth (Earth-616)   
+        16355   693077                    William Shakespeare (Earth-616)   
+        16356   473710                       Yamata no Orichi (Earth-616)   
+        16357   670512  Zero G. Priestly (Legion Personality) (Earth-616)   
+        16358    12132                            Zora Loftus (Earth-616)   
+        16359   727035                                   Agar (Earth-616)   
+        16360   703546      Ana (Natasha Romanoff's neighbor) (Earth-616)   
+        16361   713903                         Dante's mother (Earth-616)   
+        16362   508693                               Farbauti (Earth-616)   
+        16363   694577         Finch (Kate Bishop's neighbor) (Earth-616)   
+        16364   655292              Jack O'Lantern (Impostor) (Earth-616)   
+        16365   684262                                 K'thol (Earth-616)   
+        16366   643435            Karen (Hijack's girlfriend) (Earth-616)   
+        16367   694583        Marcus (Kate Bishop's neighbor) (Earth-616)   
+        16368   703892               Marcy (Offer's employee) (Earth-616)   
+        16369   660799                         Melanie Kapoor (Earth-616)   
+        16370   674414                       Phoenix's Shadow (Earth-616)   
+        16371   657508                                 Ru'ach (Earth-616)   
+        16372   665474                    Thane (Thanos' son) (Earth-616)   
+        16373   695217                      Tinkerer (Skrull) (Earth-616)   
+        16374   708811                     TK421 (Spiderling) (Earth-616)   
+        16375   673702                              Yologarch (Earth-616)   
+        
+                                                         URLSLUG                ID  \textbackslash{}
+        6541                 \textbackslash{}/wiki\textbackslash{}/Matteo\_Bischoff\_(New\_Earth)   Secret Identity   
+        6542                      \textbackslash{}/wiki\textbackslash{}/Doomslayer\_(New\_Earth)   Secret Identity   
+        6543                      \textbackslash{}/wiki\textbackslash{}/Emily\_Sung\_(New\_Earth)   Secret Identity   
+        6544                        \textbackslash{}/wiki\textbackslash{}/Ry\%27jll\_(New\_Earth)   Secret Identity   
+        6545                   \textbackslash{}/wiki\textbackslash{}/Baron\_Gestapo\_(New\_Earth)               NaN   
+        6546                     \textbackslash{}/wiki\textbackslash{}/Barro\_Cruzz\_(New\_Earth)               NaN   
+        6547                   \textbackslash{}/wiki\textbackslash{}/Barry\_Quinzel\_(New\_Earth)   Public Identity   
+        6548                    \textbackslash{}/wiki\textbackslash{}/Dragonfly\_II\_(New\_Earth)   Secret Identity   
+        6549                   \textbackslash{}/wiki\textbackslash{}/Altin\_Ad\%27Ms\_(New\_Earth)   Public Identity   
+        6550                \textbackslash{}/wiki\textbackslash{}/D\%27Kay\_D\%27Razz\_(New\_Earth)   Secret Identity   
+        6551           \textbackslash{}/wiki\textbackslash{}/Jade\_Emperor\_Impostor\_(New\_Earth)   Secret Identity   
+        6552                    \textbackslash{}/wiki\textbackslash{}/Kaldur\%27ahm\_(New\_Earth)               NaN   
+        6553                       \textbackslash{}/wiki\textbackslash{}/Nightwing\_(New\_Earth)   Secret Identity   
+        6554                  \textbackslash{}/wiki\textbackslash{}/Douglas\_Parker\_(New\_Earth)   Public Identity   
+        6555                        \textbackslash{}/wiki\textbackslash{}/Aga\%27po\_(New\_Earth)   Public Identity   
+        6556                       \textbackslash{}/wiki\textbackslash{}/Flamebird\_(New\_Earth)   Secret Identity   
+        6557                \textbackslash{}/wiki\textbackslash{}/Bro\%27Dee\_Walker\_(New\_Earth)   Public Identity   
+        6558                         \textbackslash{}/wiki\textbackslash{}/Cynthos\_(New\_Earth)               NaN   
+        6559                      \textbackslash{}/wiki\textbackslash{}/Nosa\%27elg\_(New\_Earth)               NaN   
+        6560              \textbackslash{}/wiki\textbackslash{}/S\%27kidds\%27kakoth\_(New\_Earth)   Secret Identity   
+        6561             \textbackslash{}/wiki\textbackslash{}/Baroness\_Blitzkrieg\_(New\_Earth)               NaN   
+        6562                    \textbackslash{}/wiki\textbackslash{}/Dorian\_Chase\_(New\_Earth)   Secret Identity   
+        6563                   \textbackslash{}/wiki\textbackslash{}/Bizarro\_Joker\_(New\_Earth)   Secret Identity   
+        6564                     \textbackslash{}/wiki\textbackslash{}/Bur\%27Gunza\_(New\_Earth)               NaN   
+        6565                   \textbackslash{}/wiki\textbackslash{}/R\%27amey\_Holl\_(New\_Earth)   Public Identity   
+        6566                        \textbackslash{}/wiki\textbackslash{}/Sn\%27Hoj\_(New\_Earth)               NaN   
+        6567                 \textbackslash{}/wiki\textbackslash{}/Baron\_Bedlam\_II\_(New\_Earth)   Public Identity   
+        6568                       \textbackslash{}/wiki\textbackslash{}/Barracuda\_(New\_Earth)   Secret Identity   
+        6569                    \textbackslash{}/wiki\textbackslash{}/Barry\_Pierce\_(New\_Earth)   Public Identity   
+        6570                      \textbackslash{}/wiki\textbackslash{}/Basketcase\_(New\_Earth)   Secret Identity   
+        {\ldots}                                                  {\ldots}               {\ldots}   
+        16346                              \textbackslash{}/Thiazzi\_(Earth-616)               NaN   
+        16347                                   \textbackslash{}/User:TOR\textbackslash{}/test               NaN   
+        16348                     \textbackslash{}/Toxin\_(Luminals)\_(Earth-616)   Secret Identity   
+        16349                      \textbackslash{}/Urizen\_Ul\%27var\_(Earth-616)   Public Identity   
+        16350                                \textbackslash{}/Valka\_(Earth-616)               NaN   
+        16351                                \textbackslash{}/Vayor\_(Earth-616)  No Dual Identity   
+        16352                             \textbackslash{}/Viridian\_(Earth-616)               NaN   
+        16353                        \textbackslash{}/William\_Burke\_(Earth-616)               NaN   
+        16354                    \textbackslash{}/William\_Falsworth\_(Earth-616)               NaN   
+        16355                  \textbackslash{}/William\_Shakespeare\_(Earth-616)   Public Identity   
+        16356                     \textbackslash{}/Yamata\_no\_Orichi\_(Earth-616)   Public Identity   
+        16357  \textbackslash{}/Zero\_G.\_Priestly\_(Legion\_Personality)\_(Earth{\ldots}   Secret Identity   
+        16358                          \textbackslash{}/Zora\_Loftus\_(Earth-616)   Secret Identity   
+        16359                                 \textbackslash{}/Agar\_(Earth-616)  No Dual Identity   
+        16360  \textbackslash{}/Ana\_(Natasha\_Romanoff\%27s\_neighbor)\_(Earth-616)  No Dual Identity   
+        16361                     \textbackslash{}/Dante\%27s\_mother\_(Earth-616)  No Dual Identity   
+        16362                             \textbackslash{}/Farbauti\_(Earth-616)   Public Identity   
+        16363     \textbackslash{}/Finch\_(Kate\_Bishop\%27s\_neighbor)\_(Earth-616)   Public Identity   
+        16364          \textbackslash{}/Jack\_O\%27Lantern\_(Impostor)\_(Earth-616)   Secret Identity   
+        16365                             \textbackslash{}/K\%27thol\_(Earth-616)               NaN   
+        16366        \textbackslash{}/Karen\_(Hijack\%27s\_girlfriend)\_(Earth-616)   Public Identity   
+        16367    \textbackslash{}/Marcus\_(Kate\_Bishop\%27s\_neighbor)\_(Earth-616)   Public Identity   
+        16368           \textbackslash{}/Marcy\_(Offer\%27s\_employee)\_(Earth-616)   Public Identity   
+        16369                       \textbackslash{}/Melanie\_Kapoor\_(Earth-616)   Public Identity   
+        16370                   \textbackslash{}/Phoenix\%27s\_Shadow\_(Earth-616)               NaN   
+        16371                             \textbackslash{}/Ru\%27ach\_(Earth-616)  No Dual Identity   
+        16372                \textbackslash{}/Thane\_(Thanos\%27\_son)\_(Earth-616)  No Dual Identity   
+        16373                    \textbackslash{}/Tinkerer\_(Skrull)\_(Earth-616)   Secret Identity   
+        16374                   \textbackslash{}/TK421\_(Spiderling)\_(Earth-616)   Secret Identity   
+        16375                            \textbackslash{}/Yologarch\_(Earth-616)               NaN   
+        
+                            ALIGN          EYE         HAIR                SEX  \textbackslash{}
+        6541       Bad Characters          NaN    Grey Hair    Male Characters   
+        6542       Bad Characters   Green Eyes   White Hair    Male Characters   
+        6543      Good Characters  Violet Eyes  Purple Hair  Female Characters   
+        6544      Good Characters   Green Eyes          NaN  Female Characters   
+        6545       Bad Characters          NaN          NaN    Male Characters   
+        6546                  NaN          NaN          NaN    Male Characters   
+        6547                  NaN          NaN   Black Hair    Male Characters   
+        6548       Bad Characters          NaN   Black Hair  Female Characters   
+        6549      Good Characters   White Eyes          NaN    Male Characters   
+        6550       Bad Characters     Red Eyes          NaN  Female Characters   
+        6551       Bad Characters   Brown Eyes   Black Hair    Male Characters   
+        6552      Good Characters          NaN   Black Hair    Male Characters   
+        6553                  NaN    Blue Eyes          NaN    Male Characters   
+        6554      Good Characters   Brown Eyes    Grey Hair    Male Characters   
+        6555      Good Characters  Violet Eyes          NaN  Female Characters   
+        6556                  NaN  Yellow Eyes          NaN  Female Characters   
+        6557      Good Characters   Black Eyes          NaN    Male Characters   
+        6558      Good Characters          NaN          NaN                NaN   
+        6559      Good Characters          NaN          NaN                NaN   
+        6560      Good Characters    Blue Eyes   Brown Hair    Male Characters   
+        6561       Bad Characters          NaN          NaN  Female Characters   
+        6562   Neutral Characters   Black Eyes   Black Hair    Male Characters   
+        6563       Bad Characters          NaN   Green Hair    Male Characters   
+        6564       Bad Characters          NaN          NaN    Male Characters   
+        6565      Good Characters  Orange Eyes   Brown Hair  Female Characters   
+        6566       Bad Characters          NaN          NaN                NaN   
+        6567       Bad Characters     Red Eyes   Blond Hair    Male Characters   
+        6568       Bad Characters          NaN          NaN  Female Characters   
+        6569       Bad Characters     Red Eyes   White Hair    Male Characters   
+        6570       Bad Characters          NaN          NaN    Male Characters   
+        {\ldots}                   {\ldots}          {\ldots}          {\ldots}                {\ldots}   
+        16346                 NaN          NaN          NaN    Male Characters   
+        16347                 NaN          NaN          NaN                NaN   
+        16348                 NaN          NaN      No Hair                NaN   
+        16349     Good Characters   White Eyes          NaN    Male Characters   
+        16350                 NaN          NaN          NaN                NaN   
+        16351      Bad Characters          NaN   Black Hair    Male Characters   
+        16352                 NaN          NaN          NaN    Male Characters   
+        16353                 NaN          NaN          NaN    Male Characters   
+        16354     Good Characters          NaN          NaN    Male Characters   
+        16355  Neutral Characters          NaN          NaN    Male Characters   
+        16356      Bad Characters          NaN      No Hair    Male Characters   
+        16357  Neutral Characters          NaN          NaN    Male Characters   
+        16358      Bad Characters          NaN   Blond Hair  Female Characters   
+        16359      Bad Characters   Black Eyes      No Hair    Male Characters   
+        16360     Good Characters   Black Eyes    Grey Hair  Female Characters   
+        16361  Neutral Characters          NaN          NaN  Female Characters   
+        16362      Bad Characters     Red Eyes          NaN  Female Characters   
+        16363     Good Characters   Black Eyes         Bald    Male Characters   
+        16364      Bad Characters   Hazel Eyes         Bald    Male Characters   
+        16365     Good Characters          NaN          NaN    Male Characters   
+        16366  Neutral Characters   Brown Eyes   Black Hair  Female Characters   
+        16367     Good Characters   Hazel Eyes         Bald    Male Characters   
+        16368  Neutral Characters          NaN   Brown Hair  Female Characters   
+        16369     Good Characters    Blue Eyes   Black Hair  Female Characters   
+        16370  Neutral Characters          NaN          NaN                NaN   
+        16371      Bad Characters   Green Eyes      No Hair    Male Characters   
+        16372     Good Characters    Blue Eyes         Bald    Male Characters   
+        16373      Bad Characters   Black Eyes         Bald    Male Characters   
+        16374  Neutral Characters          NaN          NaN    Male Characters   
+        16375      Bad Characters          NaN          NaN                NaN   
+        
+                                 GSM                ALIVE  APPEARANCES  \textbackslash{}
+        6541                     NaN    Living Characters          NaN   
+        6542                     NaN    Living Characters          NaN   
+        6543                     NaN    Living Characters          NaN   
+        6544                     NaN    Living Characters          NaN   
+        6545                     NaN    Living Characters          NaN   
+        6546                     NaN    Living Characters          NaN   
+        6547                     NaN    Living Characters          NaN   
+        6548                     NaN    Living Characters          NaN   
+        6549                     NaN    Living Characters          NaN   
+        6550                     NaN  Deceased Characters          NaN   
+        6551                     NaN  Deceased Characters          NaN   
+        6552                     NaN    Living Characters          NaN   
+        6553                     NaN    Living Characters          NaN   
+        6554                     NaN    Living Characters          NaN   
+        6555                     NaN  Deceased Characters          NaN   
+        6556                     NaN    Living Characters          NaN   
+        6557                     NaN    Living Characters          NaN   
+        6558                     NaN    Living Characters          NaN   
+        6559                     NaN    Living Characters          NaN   
+        6560                     NaN    Living Characters          NaN   
+        6561                     NaN    Living Characters          NaN   
+        6562                     NaN    Living Characters          NaN   
+        6563                     NaN    Living Characters          NaN   
+        6564                     NaN  Deceased Characters          NaN   
+        6565                     NaN    Living Characters          NaN   
+        6566                     NaN    Living Characters          NaN   
+        6567                     NaN  Deceased Characters          NaN   
+        6568                     NaN    Living Characters          NaN   
+        6569                     NaN    Living Characters          NaN   
+        6570                     NaN    Living Characters          NaN   
+        {\ldots}                      {\ldots}                  {\ldots}          {\ldots}   
+        16346                    NaN  Deceased Characters          NaN   
+        16347                    NaN                  NaN          NaN   
+        16348                    NaN    Living Characters          NaN   
+        16349                    NaN    Living Characters          NaN   
+        16350                    NaN    Living Characters          NaN   
+        16351                    NaN    Living Characters          NaN   
+        16352                    NaN    Living Characters          NaN   
+        16353                    NaN    Living Characters          NaN   
+        16354                    NaN  Deceased Characters          NaN   
+        16355                    NaN    Living Characters          NaN   
+        16356                    NaN    Living Characters          NaN   
+        16357                    NaN    Living Characters          NaN   
+        16358                    NaN    Living Characters          NaN   
+        16359                    NaN    Living Characters          NaN   
+        16360                    NaN    Living Characters          NaN   
+        16361                    NaN  Deceased Characters          NaN   
+        16362                    NaN    Living Characters          NaN   
+        16363  Homosexual Characters    Living Characters          NaN   
+        16364                    NaN    Living Characters          NaN   
+        16365                    NaN  Deceased Characters          NaN   
+        16366                    NaN    Living Characters          NaN   
+        16367  Homosexual Characters    Living Characters          NaN   
+        16368                    NaN    Living Characters          NaN   
+        16369                    NaN    Living Characters          NaN   
+        16370                    NaN    Living Characters          NaN   
+        16371                    NaN    Living Characters          NaN   
+        16372                    NaN    Living Characters          NaN   
+        16373                    NaN    Living Characters          NaN   
+        16374                    NaN    Living Characters          NaN   
+        16375                    NaN    Living Characters          NaN   
+        
+              FIRST APPEARANCE    YEAR  PUBLISHER  
+        6541         2012, May  2012.0  DC Comics  
+        6542        2011, July  2011.0  DC Comics  
+        6543        2011, July  2011.0  DC Comics  
+        6544     2011, October  2011.0  DC Comics  
+        6545       2010, March  2010.0  DC Comics  
+        6546    2010, November  2010.0  DC Comics  
+        6547    2010, February  2010.0  DC Comics  
+        6548         2010, May  2010.0  DC Comics  
+        6549        2010, July  2010.0  DC Comics  
+        6550        2010, July  2010.0  DC Comics  
+        6551     2010, January  2010.0  DC Comics  
+        6552      2010, August  2010.0  DC Comics  
+        6553       2010, April  2010.0  DC Comics  
+        6554    2009, December  2009.0  DC Comics  
+        6555     2009, January  2009.0  DC Comics  
+        6556      2009, August  2009.0  DC Comics  
+        6557    2008, December  2008.0  DC Comics  
+        6558    2008, February  2008.0  DC Comics  
+        6559    2008, February  2008.0  DC Comics  
+        6560    2008, February  2008.0  DC Comics  
+        6561       2007, March  2007.0  DC Comics  
+        6562      2007, August  2007.0  DC Comics  
+        6563    2007, November  2007.0  DC Comics  
+        6564      2007, August  2007.0  DC Comics  
+        6565    2007, February  2007.0  DC Comics  
+        6566      2007, August  2007.0  DC Comics  
+        6567       2006, March  2006.0  DC Comics  
+        6568    2006, December  2006.0  DC Comics  
+        6569         2006, May  2006.0  DC Comics  
+        6570    2006, February  2006.0  DC Comics  
+        {\ldots}                {\ldots}     {\ldots}        {\ldots}  
+        16346              NaN     NaN     Marvel  
+        16347              NaN     NaN     Marvel  
+        16348              NaN     NaN     Marvel  
+        16349              NaN     NaN     Marvel  
+        16350              NaN     NaN     Marvel  
+        16351              NaN     NaN     Marvel  
+        16352              NaN     NaN     Marvel  
+        16353              NaN     NaN     Marvel  
+        16354              NaN     NaN     Marvel  
+        16355              NaN     NaN     Marvel  
+        16356              NaN     NaN     Marvel  
+        16357              NaN     NaN     Marvel  
+        16358              NaN     NaN     Marvel  
+        16359              NaN     NaN     Marvel  
+        16360              NaN     NaN     Marvel  
+        16361              NaN     NaN     Marvel  
+        16362              NaN     NaN     Marvel  
+        16363              NaN     NaN     Marvel  
+        16364              NaN     NaN     Marvel  
+        16365              NaN     NaN     Marvel  
+        16366              NaN     NaN     Marvel  
+        16367              NaN     NaN     Marvel  
+        16368              NaN     NaN     Marvel  
+        16369              NaN     NaN     Marvel  
+        16370              NaN     NaN     Marvel  
+        16371              NaN     NaN     Marvel  
+        16372              NaN     NaN     Marvel  
+        16373              NaN     NaN     Marvel  
+        16374              NaN     NaN     Marvel  
+        16375              NaN     NaN     Marvel  
+        
+        [1451 rows x 14 columns]
+\end{Verbatim}
+            
+    Se agrega la columna IS\_GSM correspondiente a un atributo lógico "el
+personaje pertenece a una minoría de género o sexual", que se utilizará
+junto con el atributo GSM ya incluido en los datasets originales (que
+indica la minoría o NaN si no pertenece). Además, se comparan los
+dominios de cada atributo en los dos datasets originales.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Imprimir dominios}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ALIGN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EYE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{HAIR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SEX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GSM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ALIVE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ATRIBUTE: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{DC: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Marvel:}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{col}\PY{p}{,} \PY{n}{dcDataset}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{marvelDataset}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-------------
+ATRIBUTE: ALIGN
+-------------
+DC: ['Good Characters' 'Bad Characters' 'Neutral Characters' nan
+ 'Reformed Criminals'] 
+Marvel:['Good Characters' 'Neutral Characters' 'Bad Characters' nan]
+-------------
+ATRIBUTE: ID
+-------------
+DC: ['Secret Identity' 'Public Identity' nan 'Identity Unknown'] 
+Marvel:['Secret Identity' 'Public Identity' 'No Dual Identity'
+ 'Known to Authorities Identity' nan]
+-------------
+ATRIBUTE: EYE
+-------------
+DC: ['Blue Eyes' 'Brown Eyes' 'Green Eyes' 'Purple Eyes' 'Black Eyes'
+ 'White Eyes' 'Red Eyes' 'Photocellular Eyes' 'Hazel Eyes' 'Amber Eyes'
+ 'Yellow Eyes' nan 'Grey Eyes' 'Pink Eyes' 'Violet Eyes' 'Gold Eyes'
+ 'Orange Eyes' 'Auburn Hair'] 
+Marvel:['Hazel Eyes' 'Blue Eyes' 'Brown Eyes' 'Green Eyes' 'Grey Eyes'
+ 'Yellow Eyes' 'Gold Eyes' 'Red Eyes' 'Black Eyeballs' 'Amber Eyes'
+ 'Variable Eyes' nan 'Black Eyes' 'White Eyes' 'Orange Eyes' 'Silver Eyes'
+ 'Purple Eyes' 'Pink Eyes' 'One Eye' 'Violet Eyes' 'Multiple Eyes'
+ 'Magenta Eyes' 'Yellow Eyeballs' 'No Eyes' 'Compound Eyes']
+-------------
+ATRIBUTE: HAIR
+-------------
+DC: ['Black Hair' 'Brown Hair' 'White Hair' 'Blond Hair' 'Red Hair' nan
+ 'Green Hair' 'Strawberry Blond Hair' 'Grey Hair' 'Silver Hair'
+ 'Orange Hair' 'Purple Hair' 'Gold Hair' 'Blue Hair' 'Reddish Brown Hair'
+ 'Pink Hair' 'Violet Hair' 'Platinum Blond Hair'] 
+Marvel:['Brown Hair' 'White Hair' 'Black Hair' 'Blond Hair' 'No Hair' 'Blue Hair'
+ 'Red Hair' 'Bald' 'Auburn Hair' 'Grey Hair' 'Silver Hair' 'Purple Hair'
+ 'Strawberry Blond Hair' 'Green Hair' 'Reddish Blond Hair' 'Gold Hair' nan
+ 'Orange Hair' 'Pink Hair' 'Variable Hair' 'Yellow Hair'
+ 'Light Brown Hair' 'Magenta Hair' 'Bronze Hair' 'Dyed Hair'
+ 'Orange-brown Hair']
+-------------
+ATRIBUTE: SEX
+-------------
+DC: ['Male Characters' 'Female Characters' nan 'Genderless Characters'
+ 'Transgender Characters'] 
+Marvel:['Male Characters' 'Female Characters' 'Genderfluid Characters'
+ 'Agender Characters' nan]
+-------------
+ATRIBUTE: GSM
+-------------
+DC: [nan 'Bisexual Characters' 'Homosexual Characters'] 
+Marvel:[nan 'Bisexual Characters' 'Transvestites' 'Homosexual Characters'
+ 'Pansexual Characters' 'Transgender Characters' 'Genderfluid Characters']
+-------------
+ATRIBUTE: ALIVE
+-------------
+DC: ['Living Characters' 'Deceased Characters' nan] 
+Marvel:['Living Characters' 'Deceased Characters' nan]
+
+    \end{Verbatim}
+
+    A partir del análisis de los datos, cantidad de NaN por columna, valores
+en los dominios, ser plantean las siguientes modificaciones en los
+datos: * En los campos ALIGN, EYE, HAIR, SEX y ALIVE, los NaN se
+reemplazarán por una etiqueta única contenida en la constante
+UNKNOWN\_LABEL. De esta manera, se tratan a todos los casos NaN de esos
+campos como un valor etiquedato como "Desconocido" (sin poder
+especificar si es porque no fue cargado o porque no le corresponde un
+valor). * Se crea el campo lógico "IS\_GSM" que corresponde a Verdadero
+si tiene asignado un valor en el campo GSM (que en los casos que aplica,
+indica el tipo de minoría de género o sexual a la que corresponde).
+Indica Falso si GSM contenía un NaN. * Se crea el campo "GENDER", con la
+siguiente lógica: Si corresponde a minoría de genero o sexual indica
+cual, sino, indica el valor del campo "SEX". Este campo permite
+consolidar los campos SEX y GSM. * Se unifica el dominio en el campo
+SEX, pues DC y Marvel tienen etiquetas diferentes ("Agender" y
+"Genderless" respectivamente) que se refieren al mismo valor.\\
+* Se eliminan los registros donde "APPEAREANCES" y/o "YEAR" tienen valor
+NaN.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ALIGN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ALIGN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{numpy}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{UNKNOWN\PYZus{}LABEL}\PY{p}{)}
+         \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EYE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EYE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{numpy}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{UNKNOWN\PYZus{}LABEL}\PY{p}{)}
+         \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HAIR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HAIR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{numpy}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{UNKNOWN\PYZus{}LABEL}\PY{p}{)}
+         \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEX}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEX}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{numpy}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{UNKNOWN\PYZus{}LABEL}\PY{p}{)}
+         \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEX}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEX}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Agender Characters}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Genderless Characters}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}Marvel usa \PYZdq{}Agender\PYZdq{} que es sinonimo de \PYZdq{}Genderless\PYZdq{} en DC}
+         \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IS\PYZus{}GSM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZti{}} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GSM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} En GSM se dejan los NaN pero se agrega otra columna IS\PYZus{}GSM }
+         \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GENDER}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{comicsDF}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{row}\PY{p}{:} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GSM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{if} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IS\PYZus{}GSM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{else} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEX}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} Agrega campo \PYZdq{}GENDER\PYZdq{}}
+         \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ALIVE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ALIVE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{numpy}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{UNKNOWN\PYZus{}LABEL}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Imprimir cuenta de valores NaN por columna}
+         \PY{n}{printNaNCount}\PY{p}{(}\PY{n}{comicsDF}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Cantidad de NaN por columna:
+----------------------------
+PAGE\_ID: 0
+NAME: 0
+URLSLUG: 0
+ID: 5783
+ALIGN: 0
+EYE: 0
+HAIR: 0
+SEX: 0
+GSM: 23118
+ALIVE: 0
+APPEARANCES: 1451
+FIRST APPEARANCE: 884
+YEAR: 884
+PUBLISHER: 0
+IS\_GSM: 0
+GENDER: 0
+
+    \end{Verbatim}
+
+    Se verifica que existen valores faltantes para el atributo
+"APPEAREANCES" (cantidad de apariciones) y "YEAR" (año de primera
+publicación). Tras analizar en detalle los casos, se decide eliminar los
+registros correspondientes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{countNaNAppearences} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{comicsDF}\PY{p}{[}\PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{APPEARANCES}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{countNaNYear} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{comicsDF}\PY{p}{[}\PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{YEAR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{countBeforeCleanRows} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{comicsDF}\PY{p}{)}
+         \PY{n}{comicsDF} \PY{o}{=} \PY{n}{comicsDF}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{APPEARANCES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YEAR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{countRows} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{comicsDF}\PY{p}{)}
+         \PY{n}{deletedRows} \PY{o}{=} \PY{n}{countBeforeCleanRows} \PY{o}{\PYZhy{}} \PY{n}{countRows}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de registros con NaN en:  APPERANCES = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{   YEAR = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{countNaNAppearences}\PY{p}{,} \PY{n}{countNaNYear}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad antes de eliminar APPEAREANCES = NaN: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{countBeforeCleanRows}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad despues de eliminar APPEAREANCES = NaN: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{countRows}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de registros eliminados: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deletedRows}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Cantidad de registros con NaN en:  APPERANCES = 1451   YEAR = 884 
+Cantidad antes de eliminar APPEAREANCES = NaN:  23272
+Cantidad despues de eliminar APPEAREANCES = NaN:  21146
+Cantidad de registros eliminados:  2126
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Operaciones Interesantes de Consulta sobre DataFrames.}
+         \PY{c+c1}{\PYZsh{}comicsDF[comicsDF[\PYZsq{}NAME\PYZsq{}].str.contains(\PYZdq{}Batman\PYZdq{})] \PYZsh{} Mostrar todos los Batman}
+         \PY{c+c1}{\PYZsh{}comicsDF.NAME.str.extract(\PYZsq{}(.*?)\PYZbs{}(\PYZsq{}, expand=True)[0].value\PYZus{}counts() \PYZsh{} Recuperar la cantidad de veces que se repite el nombre}
+\end{Verbatim}
+
+
+    \section{3. Análisis y Visualización de los
+Datos}\label{anuxe1lisis-y-visualizaciuxf3n-de-los-datos}
+
+\subsection{~3.1. Estadísticas
+Descriptivas}\label{estaduxedsticas-descriptivas}
+
+Calcular estadísticos como la moda, media, mediana y desviación estándar
+del peso y de la edad. ¿
+
+Responden a alguna distribución conocida? Realizar un análisis de
+outliers.
+
+Explicar cómo varían las métricas cuando desglosamos por género.
+
+¿Responden a alguna distribución conocida?
+
+Comparar cualitativamente y gráficamente ambas distribuciones.
+
+Calcular la correlación entre todas estas variables y mostrarla con un
+gráfico conjunto.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{APPEARANCES}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} count    21146.000000
+         mean        19.328336
+         std         94.439958
+         min          1.000000
+         25\%          1.000000
+         50\%          4.000000
+         75\%         10.000000
+         max       4043.000000
+         Name: APPEARANCES, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{APPEARANCES}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mode}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 0    1.0
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{YEAR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} count    21146.000000
+         mean      1986.223494
+         std         19.123387
+         min       1935.000000
+         25\%       1976.000000
+         50\%       1990.000000
+         75\%       2001.000000
+         max       2013.000000
+         Name: YEAR, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{comicsDF}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ALIGN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{APPEARANCES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} ALIGN
+         Bad Characters        8827
+         Good Characters       6783
+         Neutral Characters    2516
+         Reformed Criminals       3
+         UNKNOWN               3017
+         Name: APPEARANCES, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{comicsDF}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEX}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{APPEARANCES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} SEX
+         Female Characters          5302
+         Genderfluid Characters        2
+         Genderless Characters        52
+         Male Characters           14965
+         Transgender Characters        1
+         UNKNOWN                     824
+         Name: APPEARANCES, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{comicsDF}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GENDER}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GSM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{APPEARANCES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} GENDER                  GSM                   
+         Bisexual Characters     Bisexual Characters        29
+         Genderfluid Characters  Genderfluid Characters      1
+         Homosexual Characters   Homosexual Characters     111
+         Pansexual Characters    Pansexual Characters        1
+         Transgender Characters  Transgender Characters      2
+         Transvestites           Transvestites               1
+         Name: APPEARANCES, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{comicsDF}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GENDER}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ALIVE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{APPEARANCES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} GENDER                  ALIVE              
+         Bisexual Characters     Deceased Characters        4
+                                 Living Characters         25
+         Female Characters       Deceased Characters     1065
+                                 Living Characters       4173
+                                 UNKNOWN                    1
+         Genderfluid Characters  Living Characters          1
+         Genderless Characters   Deceased Characters       11
+                                 Living Characters         40
+         Homosexual Characters   Deceased Characters       22
+                                 Living Characters         88
+                                 UNKNOWN                    1
+         Male Characters         Deceased Characters     3849
+                                 Living Characters      11037
+         Pansexual Characters    Living Characters          1
+         Transgender Characters  Deceased Characters        1
+                                 Living Characters          2
+         Transvestites           Living Characters          1
+         UNKNOWN                 Deceased Characters      142
+                                 Living Characters        682
+         Name: APPEARANCES, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IS\PYZus{}DCCOMICS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PUBLISHER}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DC Comics}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IS\PYZus{}MARVEL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{comicsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PUBLISHER}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Marvel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{byYearDF} \PY{o}{=} \PY{n}{comicsDF}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YEAR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{byYearDF}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:}               PAGE\_ID  APPEARANCES    IS\_GSM  IS\_DCCOMICS  IS\_MARVEL
+         PAGE\_ID      1.000000    -0.010882  0.555785     0.738480   0.858621
+         APPEARANCES -0.010882     1.000000  0.029342     0.135186   0.249085
+         IS\_GSM       0.555785     0.029342  1.000000     0.624317   0.549667
+         IS\_DCCOMICS  0.738480     0.135186  0.624317     1.000000   0.741466
+         IS\_MARVEL    0.858621     0.249085  0.549667     0.741466   1.000000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{norm}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}chart}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{n}{show\PYZus{}line}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{313}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+             \PY{k}{if} \PY{p}{(}\PY{n}{show\PYZus{}line}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+         
+         \PY{n}{eventCountsByYear} \PY{o}{=} \PY{n}{comicsDF}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YEAR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{APPEARANCES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{eventCountsByYear}\PY{o}{.}\PY{n}{index}
+         \PY{n}{plot\PYZus{}chart}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{eventCountsByYear}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frecuencia de eventos por año}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{show\PYZus{}line}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
